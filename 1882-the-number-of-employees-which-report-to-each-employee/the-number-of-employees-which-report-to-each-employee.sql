@@ -1,8 +1,7 @@
-SELECT e1.employee_id, 
-       e1.name, 
-       COUNT(e2.employee_id) AS reports_count, 
-       ROUND(AVG(e2.age)) AS average_age
-FROM Employees e1
-JOIN Employees e2 ON e1.employee_id = e2.reports_to
-GROUP BY e1.employee_id, e1.name
-ORDER BY e1.employee_id
+SELECT e.employee_id, e.name,
+       COUNT(r.employee_id) AS reports_count,
+       ROUND(AVG(r.age), 0) AS average_age
+FROM Employees e
+JOIN Employees r ON e.employee_id = r.reports_to
+GROUP BY e.employee_id, e.name
+ORDER BY e.employee_id;
